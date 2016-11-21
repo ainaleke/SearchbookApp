@@ -20,7 +20,7 @@
         </activity>
         <activity
             android:name=".BookListActivity"
-            android:label="@string/title_activity_book_list"
+            android:label=""
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

@@ -5,8 +5,12 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.SearchView;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 
@@ -33,6 +37,7 @@ public class BookListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_book_list);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        setTitle("List of Books");
 
         bookListView=(ListView)findViewById(R.id.bookListView);
 
@@ -44,8 +49,6 @@ public class BookListActivity extends AppCompatActivity {
         bookAdapter =new BookAdapter(this,bookList);
         //bind adapter to listview
         bookListView.setAdapter(bookAdapter);
-
-
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -86,6 +89,26 @@ public class BookListActivity extends AppCompatActivity {
                 super.onFailure(statusCode, headers, responseString, throwable);
             }
         });
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_search,menu);
+        MenuItem item=menu.findItem(R.id.menuSearch);
+        SearchView searchView=(SearchView)item.getActionView();
 
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
+
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+        return super.onCreateOptionsMenu(menu);
     }
 }
