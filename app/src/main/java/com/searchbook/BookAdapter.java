@@ -57,6 +57,7 @@ import java.util.ArrayList;
         //populate data into the template view using the data object
         viewHolder.bookTitle.setText(book.getTitle());
         viewHolder.bookAuthor.setText(book.getAuthor());
+        //load book cover image using Picasso
         Picasso.with(getContext()).load(Uri.parse(book.getCoverURL()))
                 .placeholder(R.drawable.ic_nocover).into(viewHolder.bookCoverImg);
 

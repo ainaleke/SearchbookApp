@@ -8,6 +8,8 @@
     <ImageButton
         android:layout_width="71dp"
         android:layout_height="71dp"
+        android:layout_margin="4dp"
+        android:layout_marginBottom="4dp"
         android:id="@+id/imageBookCover" />
 
     <TextView

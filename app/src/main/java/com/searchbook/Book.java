@@ -76,7 +76,7 @@ public class Book {
 
     // Decodes array of book json results into business model objects
     public static ArrayList<Book> buildBookFromJson(JSONArray jsonArray){
-        ArrayList<Book> bookList = new ArrayList<>(jsonArray.length());
+        ArrayList<Book> bookList = new ArrayList<>();
         //process each result in json array, decode and convert to business
         //object
         for(int i=0;i<jsonArray.length();i++){

@@ -21,7 +21,7 @@ public class BookClient {
         return API_BASE_URL + relativeUrl;
     }
 
-    public void getBooks(final String query, JsonHttpResponseHandler handler){
+    public void getBooks(String query, JsonHttpResponseHandler handler){
         try{
             String url=getApiUrl("search.json?q=");
             client.get(url + URLEncoder.encode(query,"utf-8"),handler);
