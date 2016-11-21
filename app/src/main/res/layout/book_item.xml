@@ -22,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Author"
-        android:id="@+id/textView2"
+        android:id="@+id/bookAuthor"
         android:layout_below="@+id/bookTitle"
         android:layout_alignLeft="@+id/bookTitle"
         android:layout_alignStart="@+id/bookTitle" />
