@@ -1,4 +1,4 @@
 # SearchbookApp
-An android app used to search for books using the OpenLibrary API
+An android app used to search for books online using the OpenLibrary API
 
 
