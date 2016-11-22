@@ -16,7 +16,7 @@ import java.util.ArrayList;
 /**
  * Created by Olasumbo Ogunyemi on 11/21/2016.
  */
- public class BookAdapter extends ArrayAdapter<Book>{
+ public class BookAdapter extends BaseAdapter<Book>{
 
     //View lookup cache
     private static class ViewHolder{
@@ -25,8 +25,11 @@ import java.util.ArrayList;
         public TextView bookAuthor;
     }
 
-    public BookAdapter(Context context, ArrayList<Book> booksList){
+    public BookAdapter(List<> context, ArrayList<Book> booksList){
+
         super(context,0,booksList);
+
+
     }
 
     //translates a particular 'Book' given a position
