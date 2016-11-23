@@ -18,12 +18,14 @@
         android:layout_toRightOf="@+id/imageBookCover"
         android:layout_margin="7dp"
         android:text="Title"
+        android:textColor="#000000"
         android:id="@+id/bookTitle" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Author"
+        android:textColor="#000000"
         android:id="@+id/bookAuthor"
         android:layout_below="@+id/bookTitle"
         android:layout_alignLeft="@+id/bookTitle"

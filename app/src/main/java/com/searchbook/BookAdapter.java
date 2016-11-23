@@ -6,17 +6,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Oluwaleke Aina on 11/21/2016.
  */
- public class BookAdapter extends BaseAdapter<Book>{
+ public class BookAdapter extends ArrayAdapter<Book> {
+
+    public List<Book> bookList;
+    public Context context;
+    public List<Book> arraylist;
 
     //View lookup cache
     private static class ViewHolder{
@@ -25,20 +31,37 @@ import java.util.ArrayList;
         public TextView bookAuthor;
     }
 
-    public BookAdapter(List<> context, ArrayList<Book> booksList){
-
-        super(context,0,booksList);
-
-
+    public BookAdapter(Context context, List<Book> booksList){
+        super(context, 0, booksList);//
+        this.bookList = booksList;
+        this.context = context;
+        arraylist = new ArrayList<Book>();
+        arraylist.addAll(booksList);
     }
 
     //translates a particular 'Book' given a position
     //into a relevant row within an AdapterView
 
     @Override
+    public int getCount() {
+        return bookList.size();
+    }
+
+    @Override
+    public Book getItem(int position) {
+
+        return (Book)bookList.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
     public View getView(int position, View convertView, ViewGroup parent){
         //Get the data item for this position
-        final Book book=getItem(position);
+
         //Check if an existing view is being reused, otherwise inflate the view
 
         ViewHolder viewHolder;
@@ -47,8 +70,9 @@ import java.util.ArrayList;
         if(convertView==null){
             //we must create a new view
             viewHolder=new ViewHolder();
-            LayoutInflater inflater=(LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView =inflater.inflate(R.layout.book_item, parent, false);
+           // LayoutInflater inflater=(LayoutInflater)LayoutInflater.from(context);  //context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            convertView = LayoutInflater.from(context).inflate(R.layout.book_item, parent, false);
+            //convertView =inflater.inflate(R.layout.book_item, null);
             viewHolder.bookCoverImg=(ImageView)convertView.findViewById(R.id.imageBookCover);
             viewHolder.bookTitle=(TextView)convertView.findViewById(R.id.bookTitle);
             viewHolder.bookAuthor=(TextView)convertView.findViewById(R.id.bookAuthor);
@@ -57,15 +81,37 @@ import java.util.ArrayList;
         else{
             viewHolder=(ViewHolder)convertView.getTag();
         }
+        final Book book=getItem(position);
         //populate data into the template view using the data object
         viewHolder.bookTitle.setText(book.getTitle());
         viewHolder.bookAuthor.setText(book.getAuthor());
         //load book cover image using Picasso
-        Picasso.with(getContext()).load(Uri.parse(book.getCoverURL()))
+        Picasso.with(context).load(Uri.parse(book.getCoverURL()))
                 .placeholder(R.drawable.ic_nocover).into(viewHolder.bookCoverImg);
 
         //Return the completed viee to render on screen
         return convertView;
+    }
+    public void filter(String charText){
+//        if(charText==null){
+//            return;
+//        }
+        charText = charText.toLowerCase();
+        bookList.clear();
+        if(charText.length()!=0){
+            for(Book book:bookList){
+                if(book.getTitle().toLowerCase().contains(charText)){
+                    bookList.add(book);
+                }else if(book.getAuthor().toLowerCase().contains(charText)){
+                    bookList.add(book);
+                }
+            }
+            notifyDataSetChanged();
+        }
+//        else{
+//            bookList.addAll(arrayList);
+//            notifyDataSetChanged();
+//        }
     }
 
 }

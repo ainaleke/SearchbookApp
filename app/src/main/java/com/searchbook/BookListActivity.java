@@ -21,6 +21,7 @@ import org.json.JSONObject;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 //import cz.msebera.android.httpclient.entity.mime.Header;
 import cz.msebera.android.httpclient.Header;
@@ -31,25 +32,27 @@ public class BookListActivity extends AppCompatActivity {
     private ListView bookListView;
     private BookAdapter bookAdapter;
     private BookClient client;
-    private ArrayList<Book> bookList;
+    private List<Book> bookList;
+    String objectId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_list);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        setTitle("List of Books");
-
+        setTitle("Search for Books");
         bookListView=(ListView)findViewById(R.id.bookListView);
 
         bookList=new ArrayList<>();
         //initialize adapter
         //fetch the data remotely
-        //fetchBooks("the lord of the rings");
+        fetchBooks("the lord of the rings");
 
         bookAdapter =new BookAdapter(this,bookList);
         //bind adapter to listview
         bookListView.setAdapter(bookAdapter);
+
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -79,6 +82,7 @@ public class BookListActivity extends AppCompatActivity {
                         for(Book book :bookList){
                             bookAdapter.add(book);//add book through the adapter
                         }
+                        bookListView.setAdapter(bookAdapter);
                         bookAdapter.notifyDataSetChanged();
                     }
                 }catch(JSONException jsonex){
@@ -90,6 +94,7 @@ public class BookListActivity extends AppCompatActivity {
                 super.onFailure(statusCode, headers, responseString, throwable);
             }
         });
+
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
@@ -102,17 +107,19 @@ public class BookListActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
             @Override
             public boolean onQueryTextSubmit(String query) {
+                setTitle("Books by "+query);
                 fetchBooks(query);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                bookAdapter.getFilter().filter(newText);
+                //bookAdapter.getFilter().filter(newText);
                 return false;
             }
         });
 
         return super.onCreateOptionsMenu(menu);
     }
+
 }
