@@ -21,7 +21,16 @@
         <activity
             android:name=".BookListActivity"
             android:label=""
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".DisplayBookActivity"
+            android:label="@string/title_activity_display_book"
+            android:parentActivityName=".BookListActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.searchbook.BookListActivity" />
+        </activity>
     </application>
 
 </manifest>

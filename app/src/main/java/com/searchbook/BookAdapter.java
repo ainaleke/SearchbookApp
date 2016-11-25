@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Oluwaleke Aina on 11/21/2016.
+ * Created by Olasumbo Ogunyemi on 11/21/2016.
  */
  public class BookAdapter extends ArrayAdapter<Book> {
 

@@ -15,8 +15,14 @@ public class Book {
     private String openLibraryId;
     private String author;
     private String title;
+    private String ISBN;
 
-
+    public String getISBN() {
+        return ISBN;
+    }
+    public void setISBN(String ISBN) {
+        this.ISBN = ISBN;
+    }
     public String getOpenLibraryId(){
         return openLibraryId;
     }
@@ -37,7 +43,7 @@ public class Book {
     }
     //Get book cover from covers API
     public String getCoverURL(){
-        return "http://covers.openlibrary.org/b/olid/"+ openLibraryId+ "-L.jpg?default=false";
+        return "http://covers.openlibrary.org/b/olid/"+ openLibraryId+ "-M.jpg?default=false";
     }
     public static Book buildBookFromJson(JSONObject jsonObject){
         Book book=new Book();
