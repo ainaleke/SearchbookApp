@@ -27,20 +27,16 @@ public class Book {
         return openLibraryId;
     }
     public String getTitle(){
+
         return title;
     }
     public String getAuthor(){
+
         return author;
     }
-    public void setAuthor(String author){
-        this.author=author;
-    }
-    public void setTitle(String title){
-        this.title=title;
-    }
-    public void setOpenLibraryId(String openLibraryId){
-        this.openLibraryId=openLibraryId;
-    }
+
+
+
     //Get book cover from covers API
     public String getCoverURL(){
         return "http://covers.openlibrary.org/b/olid/"+ openLibraryId+ "-M.jpg?default=false";
@@ -55,15 +51,32 @@ public class Book {
             }
             //edition_key comes as an array so we prepare to receive it
             else if(jsonObject.has("edition_key")){
-                final JSONArray jsonArray=jsonObject.getJSONArray(("edition_key"));
+                final JSONArray jsonArray=jsonObject.getJSONArray("edition_key");
                 book.openLibraryId=jsonArray.getString(0);
             }
+
+            //final JSONArray isbnArray=jsonObject.getJSONArray("isbn");
+            book.ISBN=getISBN(jsonObject);
+
             book.title=jsonObject.has("title_suggest")? jsonObject.getString("title_suggest"):"";
             book.author=getAuthor(jsonObject);
         }catch(JSONException ex){
             ex.printStackTrace();
         }
         return book;
+    }
+    private static String getISBN(JSONObject jsonObject) {
+        try{
+            final JSONArray isbnArray=jsonObject.getJSONArray("isbn");
+            int numOfISBNVals=isbnArray.length();
+            final String[] ISBNArray=new String[numOfISBNVals];
+            for (int i = 0; i < numOfISBNVals; ++i) {
+                ISBNArray[i] = isbnArray.getString(i);
+            }
+            return ISBNArray[0];
+        }catch (JSONException ex){
+            return "";
+        }
     }
     // Return comma separated author list when there is more than one author
     private static String getAuthor(JSONObject jsonObject) {

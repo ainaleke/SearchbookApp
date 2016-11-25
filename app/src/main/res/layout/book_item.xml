@@ -2,7 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/book_container"
+    android:descendantFocusability="blocksDescendants">
 
 
     <ImageButton
@@ -10,7 +12,8 @@
         android:layout_height="71dp"
         android:layout_margin="4dp"
         android:layout_marginBottom="4dp"
-        android:id="@+id/imageBookCover" />
+        android:id="@+id/imageBookCover"
+        android:clickable="false"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -19,7 +22,8 @@
         android:layout_margin="7dp"
         android:text="Title"
         android:textColor="#000000"
-        android:id="@+id/bookTitle" />
+        android:id="@+id/bookTitle"
+        android:clickable="false"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -29,5 +33,6 @@
         android:id="@+id/bookAuthor"
         android:layout_below="@+id/bookTitle"
         android:layout_alignLeft="@+id/bookTitle"
-        android:layout_alignStart="@+id/bookTitle" />
+        android:layout_alignStart="@+id/bookTitle"
+        android:clickable="false"/>
 </RelativeLayout>

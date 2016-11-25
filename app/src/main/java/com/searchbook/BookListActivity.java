@@ -1,17 +1,24 @@
 package com.searchbook;
 
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Layout;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 
@@ -22,8 +29,6 @@ import org.json.JSONObject;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
-
-//import cz.msebera.android.httpclient.entity.mime.Header;
 import cz.msebera.android.httpclient.Header;
 import netclient.BookClient;
 
@@ -33,6 +38,7 @@ public class BookListActivity extends AppCompatActivity {
     private BookAdapter bookAdapter;
     private BookClient client;
     private List<Book> bookList;
+    private static final String TAG = "BookListActivity";
     String objectId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,16 +50,51 @@ public class BookListActivity extends AppCompatActivity {
         bookListView=(ListView)findViewById(R.id.bookListView);
 
         bookList=new ArrayList<>();
+        bookAdapter =new BookAdapter(this,bookList);
         //initialize adapter
         //fetch the data remotely
-        fetchBooks("the lord of the rings");
 
-        bookAdapter =new BookAdapter(this,bookList);
+
         //bind adapter to listview
         bookListView.setAdapter(bookAdapter);
+        //this.bookListView.setItemsCanFocus(false);
+
+        //when an item is clicked on the ListView, send the ISBN number and Book name to other activity
+        bookListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent=new Intent(BookListActivity.this,DisplayBookActivity.class);
+                Bundle bundle=new Bundle();
+                Book book=(Book)bookListView.getItemAtPosition(position);
+                bundle.putString("ISBN",book.getISBN());
+                bundle.putString("Title",book.getTitle());
+                bundle.putString("Cover URL",book.getCoverURL());
 
 
+                Toast.makeText(BookListActivity.this,book.getTitle(),Toast.LENGTH_LONG).show();
 
+                //start Activity
+                Log.i(TAG,"Hello");
+                Log.i(TAG,book.getAuthor());
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+        //listener for nothing but it allow OnItemClickListener to work
+        this.bookListView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+
+            }
+        });
+
+        fetchBooks("the lord of the rings");
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,7 +123,7 @@ public class BookListActivity extends AppCompatActivity {
                         for(Book book :bookList){
                             bookAdapter.add(book);//add book through the adapter
                         }
-                        bookListView.setAdapter(bookAdapter);
+//                        bookListView.setAdapter(bookAdapter);
                         bookAdapter.notifyDataSetChanged();
                     }
                 }catch(JSONException jsonex){
@@ -94,7 +135,6 @@ public class BookListActivity extends AppCompatActivity {
                 super.onFailure(statusCode, headers, responseString, throwable);
             }
         });
-
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
@@ -111,14 +151,12 @@ public class BookListActivity extends AppCompatActivity {
                 fetchBooks(query);
                 return false;
             }
-
             @Override
             public boolean onQueryTextChange(String newText) {
                 //bookAdapter.getFilter().filter(newText);
                 return false;
             }
         });
-
         return super.onCreateOptionsMenu(menu);
     }
 

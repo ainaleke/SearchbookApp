@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
@@ -23,6 +24,7 @@ import java.util.List;
     public List<Book> bookList;
     public Context context;
     public List<Book> arraylist;
+
 
     //View lookup cache
     private static class ViewHolder{
@@ -49,13 +51,12 @@ import java.util.List;
 
     @Override
     public Book getItem(int position) {
-
-        return (Book)bookList.get(position);
+        return bookList.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return position;
+        return 0;
     }
 
     @Override
@@ -76,19 +77,21 @@ import java.util.List;
             viewHolder.bookCoverImg=(ImageView)convertView.findViewById(R.id.imageBookCover);
             viewHolder.bookTitle=(TextView)convertView.findViewById(R.id.bookTitle);
             viewHolder.bookAuthor=(TextView)convertView.findViewById(R.id.bookAuthor);
+
             convertView.setTag(viewHolder);
         }
         else{
             viewHolder=(ViewHolder)convertView.getTag();
         }
-        final Book book=getItem(position);
+        final Book book=(Book)getItem(position);
         //populate data into the template view using the data object
         viewHolder.bookTitle.setText(book.getTitle());
         viewHolder.bookAuthor.setText(book.getAuthor());
         //load book cover image using Picasso
         Picasso.with(context).load(Uri.parse(book.getCoverURL()))
                 .placeholder(R.drawable.ic_nocover).into(viewHolder.bookCoverImg);
-
+        convertView.setFocusable(false);
+        convertView.setFocusableInTouchMode(false);
         //Return the completed viee to render on screen
         return convertView;
     }
