@@ -70,7 +70,6 @@ public class BookListActivity extends AppCompatActivity {
                 bundle.putString("Title",book.getTitle());
                 bundle.putString("Cover URL",book.getCoverURL());
 
-
                 Toast.makeText(BookListActivity.this,book.getTitle(),Toast.LENGTH_LONG).show();
 
                 //start Activity

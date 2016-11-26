@@ -30,4 +30,13 @@ public class BookClient {
         }
 
     }
+    public void getBookDetails(String isbnNumber, JsonHttpResponseHandler jsonResponse){
+        try{
+            String url=getApiUrl("api/books?bibkeys=ISBN:");//https://openlibrary.org/api/books?bibkeys=ISBN:
+            client.get(url+ URLEncoder.encode(isbnNumber,"utf-8")+"&jscmd=details&format=json",jsonResponse);
+        }
+        catch(UnsupportedEncodingException ex){
+            ex.printStackTrace();
+        }
+    }
 }
