@@ -3,4 +3,4 @@ An android app used to search for books online using the OpenLibrary API
 
 Below are the screen shots of the app, improvements still being made
 
-![](SearchBookApp/blob/master/screenshots/initialsearch_books.PNG "App showing List of Books") ![](https://github.com/ainaleke/SearchBookApp/blob/master/screenshots/searchbookappimg1.PNG "App showing List of Books")
+![](https://github.com/ainaleke/SearchBookApp/blob/master/screenshots/initialsearch_books.PNG) | ![](https://github.com/ainaleke/SearchBookApp/blob/master/screenshots/searchbookappimg1.PNG)
