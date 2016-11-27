@@ -1,6 +1,7 @@
 # SearchbookApp
 An android app used to search for books online using the [OpenLibrary API] (https://openlibrary.org/developers/api)
-Below are the screen shots of the app, improvements still being made
+Below are the screen shots of the app. 
+Improvements still being made
 
 Libraries Used:
 
