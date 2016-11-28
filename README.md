@@ -3,7 +3,7 @@ An android app used to search for books online using the [OpenLibrary API] (http
 Below are the screen shots of the app. 
 Improvements still being made
 
-Libraries Used:
+Libraries Used so far:
 
 1.  [Picasso] (http://square.github.io/picasso/)
 2.  [AsyncHTTPClient](https://github.com/loopj/android-async-http)
