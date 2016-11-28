@@ -4,7 +4,7 @@ Below are the screen shots of the app.
 
 Improvements coming shortly:
 
-1.  Peview much more details of any book-publication date, number of pages, Good reads URL, Library of COngress URL(if possible).
+1.  Peview much more details of any book-publication date, number of pages, Good reads URL, Library of Congress URL(where necessary).
 2.  UI drawer which enables users to search by ISBN, Author, Title
 3.  Animations added while previewing each book
 4.  Share book found with friends on Social media platforms.
