@@ -9,7 +9,7 @@ Below are the screen shots of the app.
 2.  UI drawer which enables users to search by ISBN, Author, Title
 3.  Animations added while previewing each book
 4.  Share book found with friends on Social media platforms.
-5.  ~~Pull/ Swipe to Refresh new books~~ **Done**
+5.  ~~Pull down/ Swipe to Refresh new books~~ **Done**
 
 And much more.
 
