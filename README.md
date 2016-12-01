@@ -11,7 +11,7 @@ Below are the screen shots of the app.
 And much more.
 
 
-Libraries Used so far:
+Libraries Used so far :
 
 1.  [Picasso] (http://square.github.io/picasso/)
 2.  [AsyncHTTPClient](https://github.com/loopj/android-async-http)
