@@ -9,23 +9,31 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 /**
- * Created by Olasumbo Ogunyemi on 11/17/2016.
+ * Created by Oluwaleke Aina on 11/17/2016.
  */
 public class Book {
     private String openLibraryId;
     private String author;
     private String title;
     private String ISBN;
+    private int numberOfPages;
+
+    public void setPublishDate(String publishDate) {
+        this.publishDate = publishDate;
+    }
+
+    private String publishDate;
+    private String publishPlaces;
+
+    public String getPublishDate() {
+        return publishDate;
+    }
 
     public String getISBN() {
+
         return ISBN;
     }
-    public void setISBN(String ISBN) {
-        this.ISBN = ISBN;
-    }
-    public String getOpenLibraryId(){
-        return openLibraryId;
-    }
+
     public String getTitle(){
 
         return title;

@@ -7,7 +7,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 /**
- * Created by Olasumbo Ogunyemi on 11/17/2016.
+ * Created by Oluwaleke Aina on 11/17/2016.
  */
 public class BookClient {
 
@@ -33,9 +33,9 @@ public class BookClient {
     public void getBookDetails(String isbnNumber, JsonHttpResponseHandler jsonResponse){
         try{
             String url=getApiUrl("api/books?bibkeys=ISBN:");//https://openlibrary.org/api/books?bibkeys=ISBN:
-            client.get(url+ URLEncoder.encode(isbnNumber,"utf-8")+"&jscmd=details&format=json",jsonResponse);
+            client.get(url+ isbnNumber+"&jscmd=details&format=json",jsonResponse);
         }
-        catch(UnsupportedEncodingException ex){
+        catch(Exception ex){
             ex.printStackTrace();
         }
     }

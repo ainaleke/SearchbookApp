@@ -20,17 +20,51 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Title:"
-        android:id="@+id/textView"
-        android:layout_below="@+id/bookCoverImg"
+        android:text="Title"
+        android:layout_marginTop="15dp"
+        android:id="@+id/book_details_title"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""
-        android:id="@+id/book_details_title"
-        android:layout_below="@+id/bookCoverImg"
-        android:layout_toRightOf="@+id/textView"
-        android:layout_toEndOf="@+id/textView" />
+        android:text="publish_date"
+        android:layout_marginTop="7dp"
+        android:id="@+id/book_details_publish_date"
+        android:layout_toEndOf="@+id/book_details_title"
+        android:layout_below="@+id/book_details_title"
+        android:layout_alignLeft="@+id/book_details_title"
+        android:layout_alignStart="@+id/book_details_title" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ISBN"
+        android:layout_marginTop="7dp"
+        android:id="@+id/book_details_isbn"
+        android:layout_toEndOf="@+id/book_details_publish_date"
+        android:layout_below="@+id/book_details_publish_date"
+        android:layout_alignLeft="@+id/book_details_publish_date"
+        android:layout_alignStart="@+id/book_details_publish_date" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Number of Pages"
+        android:layout_marginTop="7dp"
+        android:id="@+id/book_details_pages"
+        android:layout_toEndOf="@+id/book_details_isbn"
+        android:layout_below="@+id/book_details_isbn"
+        android:layout_alignLeft="@+id/book_details_isbn"
+        android:layout_alignStart="@+id/book_details_isbn" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="publish Places"
+        android:id="@+id/book_details_publish_place"
+        android:layout_marginTop="7dp"
+        android:layout_below="@+id/book_details_pages"
+        android:layout_alignLeft="@+id/book_details_pages"
+        android:layout_alignStart="@+id/book_details_pages" />
 </RelativeLayout>
