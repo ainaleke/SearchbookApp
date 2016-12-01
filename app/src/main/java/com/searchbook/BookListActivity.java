@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Layout;
@@ -39,25 +40,39 @@ public class BookListActivity extends AppCompatActivity {
     private BookClient client;
     private List<Book> bookList;
     private static final String TAG = "BookListActivity";
-    String objectId;
+    String queryString="";
+    private SwipeRefreshLayout swipeContainer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_list);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        //Lookup the swipeContainer and bind it to the View
+        swipeContainer=(SwipeRefreshLayout)findViewById(R.id.swipeContainer);
         setTitle("Search for Books");
         bookListView=(ListView)findViewById(R.id.bookListView);
 
         bookList=new ArrayList<>();
         bookAdapter =new BookAdapter(this,bookList);
-        //initialize adapter
-        //fetch the data remotely
-
-
-        //bind adapter to listview
         bookListView.setAdapter(bookAdapter);
-        //this.bookListView.setItemsCanFocus(false);
+
+        queryString="The Lord of The Rings";
+        fetchBooks(queryString);
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeContainer.setRefreshing(true);
+                fetchBooks(BookListActivity.this.queryString);
+                //Swipe Referesh is done
+                //swipeContainer.setRefreshing(false);
+            }
+        });
+        // Configure the refreshing colors
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
 
         //when an item is clicked on the ListView, send the ISBN number and Book name to other activity
         bookListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -93,7 +108,6 @@ public class BookListActivity extends AppCompatActivity {
             }
         });
 
-        fetchBooks("the lord of the rings");
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,6 +121,8 @@ public class BookListActivity extends AppCompatActivity {
     //array of book objects and binds them to adapter
     public void fetchBooks(String query){
         client =new BookClient();
+        //show refresh animation before making HTTP Call
+        swipeContainer.setRefreshing(true);
         client.getBooks(query,new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject responseObj){
@@ -119,11 +135,14 @@ public class BookListActivity extends AppCompatActivity {
                         //remove all books from the adapter
                         bookAdapter.clear();
                         //Load model objects into the adapter
-                        for(Book book :bookList){
-                            bookAdapter.add(book);//add book through the adapter
-                        }
+                        bookAdapter.addAll(bookList);
+
+//                        for(Book book :bookList){
+//                            bookAdapter.add(book);//add book through the adapter
+//                        }
 //                        bookListView.setAdapter(bookAdapter);
                         bookAdapter.notifyDataSetChanged();
+                        swipeContainer.setRefreshing(false);
                     }
                 }catch(JSONException jsonex){
                     jsonex.printStackTrace();
@@ -131,6 +150,8 @@ public class BookListActivity extends AppCompatActivity {
             }
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                // stopping swipe refresh
+                swipeContainer.setRefreshing(false);
                 super.onFailure(statusCode, headers, responseString, throwable);
             }
         });
@@ -147,6 +168,8 @@ public class BookListActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 setTitle("Books by "+query);
+                BookListActivity.this.queryString=query;
+                Log.i(TAG,"Query String: "+query);
                 fetchBooks(query);
                 return false;
             }

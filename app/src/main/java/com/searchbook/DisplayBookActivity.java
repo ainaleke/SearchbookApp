@@ -63,10 +63,6 @@ public class DisplayBookActivity extends AppCompatActivity {
 
         //fetch Book details from Open Library API
         fetchBookDetails(ISBN);
-
-
-
-
         Picasso.with(context).load(Uri.parse(coverUrl)).placeholder(R.drawable.ic_nocover).into(bookCoverImg);
 
 
@@ -100,7 +96,7 @@ public class DisplayBookActivity extends AppCompatActivity {
 
                         publishDateView.setText(details.getString("publish_date"));
                         if(!details.has("number_of_pages")){
-                            pages.setText("N/A");
+                            pages.setText("Number of Pages: N/A");
                         }else{
                             pages.setText(details.getString("number_of_pages"));}
                         if(!details.has("title")){
@@ -109,8 +105,6 @@ public class DisplayBookActivity extends AppCompatActivity {
                         else{
                             bookTitle.setText(details.getString("title"));
                         }
-
-
                     }
                 }catch(JSONException jsonex){
                     jsonex.printStackTrace();
