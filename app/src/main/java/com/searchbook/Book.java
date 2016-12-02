@@ -30,25 +30,25 @@ public class Book {
     }
 
     public String getISBN() {
-
         return ISBN;
     }
 
     public String getTitle(){
-
         return title;
     }
     public String getAuthor(){
-
         return author;
     }
-
-
 
     //Get book cover from covers API
     public String getCoverURL(){
         return "http://covers.openlibrary.org/b/olid/"+ openLibraryId+ "-M.jpg?default=false";
     }
+
+    public String getLargeCoverURL(){
+        return "http://covers.openlibrary.org/b/olid/"+ openLibraryId+ "-L.jpg?default=false";
+    }
+
     public static Book buildBookFromJson(JSONObject jsonObject){
         Book book=new Book();
         try{

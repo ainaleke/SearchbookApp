@@ -2,4 +2,5 @@
     <string name="app_name">SearchBook</string>
     <string name="title_activity_book_list">BookListActivity</string>
     <string name="title_activity_display_book">DisplayBookActivity</string>
+    <string name="swipe_down_or_pull_down_to_refresh">Swipe Down or Pull Down to Refresh</string>
 </resources>

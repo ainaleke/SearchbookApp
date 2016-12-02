@@ -83,7 +83,7 @@ public class BookListActivity extends AppCompatActivity {
                 Book book=(Book)bookListView.getItemAtPosition(position);
                 bundle.putString("ISBN",book.getISBN());
                 bundle.putString("Title",book.getTitle());
-                bundle.putString("Cover URL",book.getCoverURL());
+                bundle.putString("Cover URL",book.getLargeCoverURL());
 
                 Toast.makeText(BookListActivity.this,book.getTitle(),Toast.LENGTH_LONG).show();
 
@@ -136,11 +136,7 @@ public class BookListActivity extends AppCompatActivity {
                         bookAdapter.clear();
                         //Load model objects into the adapter
                         bookAdapter.addAll(bookList);
-
-//                        for(Book book :bookList){
-//                            bookAdapter.add(book);//add book through the adapter
-//                        }
-//                        bookListView.setAdapter(bookAdapter);
+//                      bookListView.setAdapter(bookAdapter);
                         bookAdapter.notifyDataSetChanged();
                         swipeContainer.setRefreshing(false);
                     }
@@ -160,18 +156,24 @@ public class BookListActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.menu_search,menu);
-        MenuItem searchItem=menu.findItem(R.id.menuSearch);
-        SearchView searchView=(SearchView) MenuItemCompat.getActionView(searchItem);
+        final MenuItem searchItem=menu.findItem(R.id.menuSearch);
+        final SearchView searchView=(SearchView) MenuItemCompat.getActionView(searchItem);
 
         searchView.setSubmitButtonEnabled(true);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
             @Override
             public boolean onQueryTextSubmit(String query) {
-                setTitle("Books by "+query);
-                BookListActivity.this.queryString=query;
-                Log.i(TAG,"Query String: "+query);
+                //Log.i(TAG,"Query String: "+query);
                 fetchBooks(query);
-                return false;
+                //Reset SearchView
+                searchView.clearFocus();
+                searchView.setQuery("",false);
+                searchView.setIconified(true);
+                searchItem.collapseActionView();
+
+                setTitle(query);
+                BookListActivity.this.queryString=query;
+                return true;
             }
             @Override
             public boolean onQueryTextChange(String newText) {
