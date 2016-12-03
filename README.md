@@ -19,6 +19,9 @@ Libraries Used so far :
 1.  [Picasso] (http://square.github.io/picasso/)
 2.  [AsyncHTTPClient](https://github.com/loopj/android-async-http)
 
-![](https://github.com/ainaleke/SearchBookApp/blob/master/screenshots/screenshot1.PNG)|![](https://github.com/ainaleke/SearchBookApp/blob/master/screenshots/book_details.PNG)
+![](https://github.com/ainaleke/SearchBookApp/blob/master/screenshots/screenshot1.PNG)|![](https://github.com/ainaleke/SearchBookApp/blob/master/screenshots/book_details.PNG)|![](https://github.com/ainaleke/SearchBookApp/blob/master/screenshots/share_2.PNG)|![](https://github.com/ainaleke/SearchBookApp/blob/master/screenshots/searchbookappimg1.PNG)
 
-![](https://github.com/ainaleke/SearchBookApp/blob/master/screenshots/searchbookappimg1.PNG)
+
+![](https://github.com/ainaleke/SearchBookApp/blob/master/screenshots/share_4.PNG)
+
+
