@@ -25,7 +25,7 @@ Libraries Used so far :
 ![](https://github.com/ainaleke/SearchBookApp/blob/master/screenshots/share_2.PNG)
 
 
-## Image being shared
+### Image being shared
 ![](https://github.com/ainaleke/SearchBookApp/blob/master/screenshots/share_4.PNG)
 
 
