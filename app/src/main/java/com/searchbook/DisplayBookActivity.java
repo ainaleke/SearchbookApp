@@ -67,8 +67,6 @@ public class DisplayBookActivity extends AppCompatActivity {
         coverUrl=bundle.getString("Cover URL");
         ISBN=bundle.getString("ISBN");
 
-
-
         //System.out.println(coverUrl);
         bookCoverImg=(ImageView)findViewById(R.id.bookCoverImg);
         bookTitle=(TextView)findViewById(R.id.book_details_title);
@@ -82,8 +80,6 @@ public class DisplayBookActivity extends AppCompatActivity {
         //fetch Book details from Open Library API
         fetchBookDetails(ISBN);
         Picasso.with(context).load(Uri.parse(coverUrl)).placeholder(R.drawable.ic_nocover).into(bookCoverImg);
-
-
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
