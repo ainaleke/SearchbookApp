@@ -22,6 +22,6 @@ Libraries Used so far :
 ![](https://github.com/ainaleke/SearchBookApp/blob/master/screenshots/screenshot1.PNG)|![](https://github.com/ainaleke/SearchBookApp/blob/master/screenshots/book_details.PNG)
 
 
-![](https://github.com/ainaleke/SearchBookApp/blob/master/screenshots/share_2.PNG)| ![](https://github.com/ainaleke/SearchBookApp/blob/master/screenshots/share_4.PNG)
+![](https://github.com/ainaleke/SearchBookApp/blob/master/screenshots/share_2.PNG)|![](https://github.com/ainaleke/SearchBookApp/blob/master/screenshots/share_4.PNG)
 
 
